@@ -417,12 +417,15 @@ kip --trace
 | **`Shift+Tab`** | **切换 Normal/YOLO 模式** |
 
 ### 支持的模型提供商
-| 提供商 | 模型 ID | API Key 环境变量 |
-|--------|---------|-----------------|
-| OpenAI | `gpt-3.5-turbo`, `gpt-4`, `gpt-4o` | `OPENAI_API_KEY` |
-| Anthropic | `claude-3-sonnet-20240229`, `claude-3-opus-20240229` | `ANTHROPIC_API_KEY` |
-| DeepSeek | `deepseek-chat` | `DEEPSEEK_API_KEY` |
-| **阿里云百炼** | `qwen-turbo`, `qwen-plus`, `qwen-max`, `qwen-coder-plus` | `DASHSCOPE_API_KEY` |
+
+**API Key**：KIP 只从 `config.yaml` 里的 **`llm.api_key_env`** 所指环境变量读取密钥，**默认变量名为 `KIP_LLM_APIKEY`**；与具体提供商无绑定，也**不会**自动读取 `OPENAI_API_KEY`、`ANTHROPIC_API_KEY`、`DEEPSEEK_API_KEY`、`DASHSCOPE_API_KEY` 等。若希望与某工具习惯一致，可自行在配置里把 `api_key_env` 改成对应名称并 `export`。密钥勿写入 YAML。
+
+| 提供商 | 模型 ID 示例 |
+|--------|----------------|
+| OpenAI | `gpt-3.5-turbo`, `gpt-4`, `gpt-4o` |
+| Anthropic | `claude-3-sonnet-20240229`, `claude-3-opus-20240229` |
+| DeepSeek | `deepseek-chat` |
+| **阿里云百炼** | `qwen-turbo`, `qwen-plus`, `qwen-max`, `qwen-coder-plus`；首次引导与 `/setup` 预设亦含 `qwen3.6-plus` 等 |
 
 ### 已注册工具
 | 工具名称 | 功能 | 安全 |
@@ -457,6 +460,7 @@ kip --trace
 | **2026-04-12** | **测试**：`tests/` + pytest；`pip install -e ".[dev]"` 后 `pytest`。 |
 | **2026-04-14** | **仓库**：`scripts/` 纳入 `.gitignore` 不再提交（发布、TestPyPI 试装等维护者本地保留）；README / 本文件改为说明 `pytest` 与 **twine** 发布流程。 |
 | **2026-04-15** | **分发**：`kip-cli` 已发布 **正式 PyPI**；`KIP.MD` / `README.md` 补充 `pip install kip-cli` 与升级说明；TestPyPI 仅作可选试装说明。 |
+| **2026-04-12** | **文档**：「支持的模型提供商」修正为与实现一致：API Key 仅经 `llm.api_key_env`（默认 `KIP_LLM_APIKEY`），非各厂商独立环境变量名。 |
 | **2026-04-12** | **SOUL**：根目录 `SOUL.MD` + `soul.py`；`paths.soul_path` / `KIP_SOUL`；`Agent(soul_markdown=…)`；欢迎面板显示加载状态。 |
 
 > **当前状态**：本仓库按 `KIP.MD` 所述完成 **从零脚手架**（`src/kip`、Phase 1–6 测试、示例 MCP）。核心 REPL / Agent / 工具 / MCP 可运行。  

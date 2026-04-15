@@ -147,6 +147,19 @@ pip install \
 | **Rule** | Put the real key in the environment variable named by `llm.api_key_env` in `config.yaml` (default: **`KIP_LLM_APIKEY`**). Do not commit secrets. | 真实密钥放在 `config.yaml` 中 `llm.api_key_env` 所指的环境变量里（默认 **`KIP_LLM_APIKEY`**），勿把密钥写入 YAML 或提交仓库。 |
 | **Example** | `export KIP_LLM_APIKEY="sk-..."` | `export KIP_LLM_APIKEY="sk-..."` |
 
+**English** — KIP **only** reads the key from the variable named by `llm.api_key_env` (default **`KIP_LLM_APIKEY`**). It does **not** automatically pick up `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `DEEPSEEK_API_KEY`, `DASHSCOPE_API_KEY`, or other vendor-default names. To align with another tool, set `api_key_env` in `config.yaml` to that name and `export` it.
+
+**中文** — KIP **只**从 `llm.api_key_env` 所指环境变量读取密钥（默认 **`KIP_LLM_APIKEY`**），**不会**自动使用 `OPENAI_API_KEY`、`ANTHROPIC_API_KEY`、`DEEPSEEK_API_KEY`、`DASHSCOPE_API_KEY` 等。若需与其它工具习惯一致，可在配置里将 `api_key_env` 改为对应名称并自行 `export`。
+
+### Model providers · 模型提供商
+
+| Provider · 提供商 | Example model IDs · 模型 ID 示例 |
+|-------------------|----------------------------------|
+| OpenAI | `gpt-3.5-turbo`, `gpt-4`, `gpt-4o` |
+| Anthropic | `claude-3-sonnet-20240229`, `claude-3-opus-20240229` |
+| DeepSeek | `deepseek-chat` |
+| **阿里云百炼** | `qwen-turbo`, `qwen-plus`, `qwen-max`, `qwen-coder-plus`; first-run & `/setup` presets also include `qwen3.6-plus`, etc. |
+
 ### Paths & `config.yaml` · 路径与配置文件
 
 | Variable · 变量 | English | 中文 |
