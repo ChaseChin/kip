@@ -447,7 +447,7 @@ kip --trace
 
 | 日期 | 内容 |
 |------|------|
-| **2026-04-12** | **文档命名**：原 `QWEN.MD` 更名为 **`KIP.MD`**，作为本项目的规则与需求主文档；README 链接与文内引用已同步。 |
+| **2026-04-12** | **文档命名**：原 `CLAUDE.MD` 更名为 **`KIP.MD`**，作为本项目的规则与需求主文档；README 链接与文内引用已同步。 |
 | **2026-04-12** | 文档：将 Phase 6 后「与本仓库一致」的功能整理进本文件；新增「全量更新说明」；项目结构补充 `banner.py`、`branding.py`、`repl_common.py`、`mcp/`；模块表补充欢迎/品牌/REPL 调度；未实现项单独标注，避免与已实现功能混淆。 |
 | **2026-04-12** | 行为：底部状态栏曾含 SQLite 路径，后已移除以缩短行宽，改为展示 **context window** 文案；助手回复使用 **`branding.assistant_reply_panel`**；启动 **`banner.print_welcome`**；**Shift+Tab** 切换 YOLO（`Keys.BackTab`）；**asyncio** `debug=False` + `set_debug(False)` + `PYTHONASYNCIODEBUG=0`；**LiteLLM** `LITELLM_LOCAL_MODEL_COST_MAP`；**首次引导**与 **`/setup`**：`repl_llm_reconfigure`，密钥仅环境变量；**错误**不打印堆栈；移除分屏 REPL 实验代码。 |
 | **2026-04-12** | **CLI**：`--version`；**帮助**：`repl_help` 展示 `__version__`；**发布**：`twine` 仅上传当前 `pyproject.toml` 版本对应两件制品；**文档**：README / `KIP.MD` 同步上述与 `/setup` 说明；修正「API Key 仅环境变量」表述。 |
