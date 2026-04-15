@@ -44,12 +44,15 @@
 
 ## Installation · 安装
 
-### From PyPI · 从 PyPI 安装
+### From PyPI · 从 PyPI 安装（推荐）
+
+包名 **`kip-cli`**，已发布在：**https://pypi.org/project/kip-cli/**
 
 **English** — Install from **pypi.org** (no extra index flags needed):
 
 ```bash
 pip install kip-cli
+# pin version if needed: pip install "kip-cli==0.5.0"
 playwright install chromium   # optional, browser tools
 ```
 
@@ -57,10 +60,11 @@ playwright install chromium   # optional, browser tools
 
 ```bash
 pip install kip-cli
+# 固定版本示例：pip install "kip-cli==0.5.0"
 playwright install chromium   # 可选，浏览器相关工具
 ```
 
-若尚未在 pypi.org 发布，会报找不到包；可先用 **下文 TestPyPI** 或 **源码安装**。
+升级：`pip install -U kip-cli`。
 
 ### From source · 从源码安装
 
@@ -95,30 +99,32 @@ playwright install chromium        # 可选
 | **`mcp` / `litellm` 等 (from versions: none)** | 与 TestPyPI 无关，但**同样受本机 pip 源配置影响**（仅镜像、仅 TestPyPI、`PIP_INDEX_URL` 等）。可先：`pip install -e ".[dev]" --extra-index-url https://pypi.org/simple`，或 `pip config list` 后调整 `pip.conf`。 |
 | **Python 版本** | 需要 **≥ 3.10**（见 `pyproject.toml` 的 `requires-python`）。 |
 
-### From TestPyPI · 从 TestPyPI 试装
+### From TestPyPI · 从 TestPyPI 试装（可选）
 
-**English** — TestPyPI does **not** mirror all dependencies. If you only use `--index-url https://test.pypi.org/simple/`, pip will fail to resolve packages like `platformdirs`. Add PyPI as an extra index so **kip-cli** comes from TestPyPI and **dependencies** from PyPI:
+**一般用户请用上文「从 PyPI 安装」**；本节仅供维护者验证 **TestPyPI** 上的预发布或试装包。
+
+**English** — TestPyPI does **not** mirror all dependencies. Use **both** indexes so **kip-cli** can be pulled from TestPyPI while **dependencies** resolve from PyPI:
 
 ```bash
 pip install \
   --index-url https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple \
-  kip-cli==0.5.0
+  "kip-cli==0.5.0"
 ```
 
 **中文** —
 
-- **`kip-cli` 只存在于 TestPyPI**，不在 pypi.org；必须用下面**双索引**命令，否则会报 **`Could not find a version ... (from versions: none)`**。
-- TestPyPI **不会**镜像全部依赖。若**只**用 `test.pypi.org` 作为唯一索引，会出现 `platformdirs` 等依赖 **No matching distribution**。因此需要 **TestPyPI + 官方 PyPI** 双索引：`kip-cli` 从 TestPyPI 装，**依赖**从 pypi.org 装。
+- 正式版已在 **pypi.org**；只有当你要装 **仅发布在 TestPyPI** 上的构建时，才需要下面**双索引**（否则会出现依赖 `from versions: none` 等问题）。
+- TestPyPI **不会**镜像全部依赖，**必须**同时加 `--extra-index-url https://pypi.org/simple`。
 
 ```bash
 pip install \
   --index-url https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple \
-  kip-cli==0.5.0
+  "kip-cli==0.5.0"
 ```
 
-在仓库根目录可先 `python3 -m venv .venv-pip`，再执行（将 `0.5.0` 换成 TestPyPI 上实际版本）：  
+示例（独立 venv）：`python3 -m venv .venv-pip`，再执行（版本号与 TestPyPI 上实际一致）：  
 `.venv-pip/bin/pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple "kip-cli==0.5.0"`。
 
 #### Troubleshooting · 排错

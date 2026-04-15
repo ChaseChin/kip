@@ -15,6 +15,7 @@
 | **执行能力** | 内置 Skill、MCP 协议接入、本地系统操作、浏览器自动化、天气查询 |
 | **过程可视化** | 执行过程中实时输出任务步骤、工具调用、中间结果与最终状态 |
 | **记忆系统** | 基于 SQLite 持久化对话历史、工具执行日志、长期记忆与上下文状态 |
+| **分发安装** | PyPI 包名 **`kip-cli`**（[pypi.org/project/kip-cli](https://pypi.org/project/kip-cli/)）；`pip install kip-cli`；版本与 `pyproject.toml` 的 `version` 一致；浏览器工具需额外 `playwright install chromium` |
 
 ---
 
@@ -355,6 +356,19 @@ pytest
 
 ## 🚀 启动与使用
 
+### 安装（PyPI）
+
+正式包已发布，包名 **`kip-cli`**：
+
+```bash
+pip install kip-cli
+# 固定版本示例：pip install "kip-cli==0.5.0"
+pip install -U kip-cli   # 升级
+```
+
+使用浏览器类工具前（可选）：`playwright install chromium`。  
+维护者从 **TestPyPI** 试装、从 **源码** 可编辑安装等，见仓库 **`README.md`** 对应章节。
+
 ### 基本启动
 ```bash
 kip
@@ -442,6 +456,7 @@ kip --trace
 | **2026-04-12** | **AppleScript**：内置工具 `run_applescript`（仅 macOS，`osascript -e`；`is_safe=False`）。 |
 | **2026-04-12** | **测试**：`tests/` + pytest；`pip install -e ".[dev]"` 后 `pytest`。 |
 | **2026-04-14** | **仓库**：`scripts/` 纳入 `.gitignore` 不再提交（发布、TestPyPI 试装等维护者本地保留）；README / 本文件改为说明 `pytest` 与 **twine** 发布流程。 |
+| **2026-04-15** | **分发**：`kip-cli` 已发布 **正式 PyPI**；`KIP.MD` / `README.md` 补充 `pip install kip-cli` 与升级说明；TestPyPI 仅作可选试装说明。 |
 | **2026-04-12** | **SOUL**：根目录 `SOUL.MD` + `soul.py`；`paths.soul_path` / `KIP_SOUL`；`Agent(soul_markdown=…)`；欢迎面板显示加载状态。 |
 
 > **当前状态**：本仓库按 `KIP.MD` 所述完成 **从零脚手架**（`src/kip`、Phase 1–6 测试、示例 MCP）。核心 REPL / Agent / 工具 / MCP 可运行。  
