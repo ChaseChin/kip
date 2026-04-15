@@ -1,0 +1,41 @@
+# 虚拟环境
+.venv/
+.venv-pip/
+venv/
+env/
+
+# Python 构建与缓存
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# 本地配置（仓库内用 config.example.yaml 作为模板）
+config.yaml
+.env
+.env.*
+*.local.yaml
+
+# 人设与开发笔记（仅本机）
+SOUL.MD
+DEV.MD
+
+# 运行时数据：库、日志、已安装 skill（保留空目录占位）
+data/*
+!data/.gitkeep
+
+# 密钥与杂项
+*.pem
+.DS_Store
+.cursor/
+
+# 本地草稿（可选）
+KIP_draft.MD
+
+# 维护者本地脚本（发布、TestPyPI 试装等），不纳入版本库
+scripts/

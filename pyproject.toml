@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kip-cli"
+version = "0.5.0"
+description = "对话式命令行 AI Agent (KIP)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+  "platformdirs>=4.0",
+  "prompt_toolkit>=3.0.36",
+  "rich>=13.7.0",
+  "litellm>=1.35.0",
+  "mcp>=0.1.0",
+  "playwright>=1.40.0",
+  "pydantic>=2.6",
+  "pyyaml>=6.0",
+  "aiosqlite>=0.20.0",
+  "aiofiles>=23.2.0",
+  "httpx>=0.27.0",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://github.com/ChaseChin/kip"
+Repository = "https://github.com/ChaseChin/kip"
+Issues = "https://github.com/ChaseChin/kip/issues"
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.3.0",
+  "mypy>=1.8.0",
+  "types-PyYAML",
+  "types-aiofiles",
+  "pytest>=8.0",
+  "pytest-asyncio>=0.24",
+]
+
+[project.scripts]
+kip = "kip.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+packages = ["kip"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

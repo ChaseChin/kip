@@ -1,0 +1,7 @@
+{
+  "id": "skill_echo",
+  "name": "Echo 示例",
+  "version": "1.0.0",
+  "module": "echo_tools",
+  "factory": "build_tools"
+}

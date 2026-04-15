@@ -1,0 +1,32 @@
+# 复制本文件为 config.yaml 后按需修改；API Key 请用环境变量（见 llm.api_key_env），勿写入 YAML。
+# cp config.example.yaml config.yaml
+
+llm:
+  model: qwen3.6-plus
+  base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  api_key_env: KIP_LLM_APIKEY
+  max_output_tokens: 4096
+  temperature: 0.7
+  context_window: 65536
+
+memory:
+  db_path: data/kip_memory.db
+  max_history_messages: 40
+  auto_extract_long_term: true
+  long_term_inject_max: 12
+  dev_md_max_chars: 32000
+
+safety:
+  enabled: true
+  browser_allowed_hosts: []
+
+mcp:
+  servers: []
+
+paths:
+  cwd: "."
+  skills_dir: data/skills
+  soul_path: SOUL.MD
+  dev_md_path: DEV.MD
+  log_path: data/kip.log
+  log_level: INFO
