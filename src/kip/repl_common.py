@@ -16,6 +16,7 @@ from kip.log_setup import preview_text
 from kip.paths import resolve_config_relative
 from kip.repl_help import print_repl_help, print_repl_help_short
 from kip.repl_cancel import await_with_esc_cancel
+from kip.safety import prompt_one_line
 
 if TYPE_CHECKING:
     from kip.agent import Agent, AgentContext
@@ -194,13 +195,7 @@ async def execute_repl_line(
                         "模型与 API Key 交互；不删除记忆库与日志；"
                         "[bold]不会[/bold]删除、覆盖或按首次向导重建 [bold]SOUL、DEV、skills[/bold]。"
                     )
-                try:
-                    ans = await asyncio.to_thread(
-                        input,
-                        "确认请输入 yes，其它键取消: ",
-                    )
-                except EOFError:
-                    return "continue"
+                ans = await prompt_one_line("确认请输入 yes，其它键取消: ")
                 if (ans or "").strip().lower() != "yes":
                     console.print("[dim]已取消。[/dim]")
                     return "continue"

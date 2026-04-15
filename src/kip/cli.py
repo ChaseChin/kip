@@ -408,7 +408,9 @@ async def run_repl(
         line: str | None = None
         while True:
             try:
-                line = await asyncio.get_event_loop().run_in_executor(None, session.prompt)
+                # 须用 prompt_async 与 asyncio.run(main) 同一事件循环；勿 run_in_executor(session.prompt)，
+                # 否则 prompt_toolkit 在子线程里 create_task 会触发「Non-thread-safe operation…」。
+                line = await session.prompt_async()
             except EOFError:
                 eof_streak += 1
                 if eof_streak >= 2:

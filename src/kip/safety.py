@@ -4,9 +4,51 @@ from __future__ import annotations
 
 import asyncio
 import inspect
+import os
+import sys
 from typing import Awaitable, Callable, Union
 
 ConfirmFn = Callable[[str], Union[bool, Awaitable[bool]]]
+
+
+def _stdin_cooked_hint() -> None:
+    """在部分终端里，prompt_toolkit 结束后仍可能处于 raw/cbreak；随后 ``input()`` 会读不到行。
+
+    对交互式 TTY 尝试恢复常见行规（忽略失败）。"""
+    if not sys.stdin.isatty():
+        return
+    if sys.platform == "win32":
+        return
+    # 子 shell 作用于当前控制终端；失败时静默
+    if os.environ.get("KIP_SKIP_STTY_SANE", "").strip() not in ("", "0", "false"):
+        return
+    os.system("stty sane 2>/dev/null")
+
+
+def _flush_stdin_if_tty() -> None:
+    """丢弃 stdin 中可能残留的按键/换行，避免下一轮 ``prompt_async`` 挂起或误读。"""
+    if not sys.stdin.isatty():
+        return
+    try:
+        import termios
+
+        termios.tcflush(sys.stdin.fileno(), termios.TCIFLUSH)
+    except Exception:
+        pass
+
+
+async def prompt_one_line(message: str) -> str:
+    """工具确认、/setup 等单行提示：在线程池中 ``input()``，不阻塞 asyncio 事件循环。
+
+    若在 ``async`` 里直接 ``input()``，会占死事件循环，可能导致确认后主界面 ``prompt_async`` 无法继续。
+    与主 REPL 的 prompt_toolkit 仍分离（确认不用 PT）。"""
+    _stdin_cooked_hint()
+    try:
+        line = await asyncio.to_thread(input, message)
+    except EOFError:
+        return ""
+    _flush_stdin_if_tty()
+    return line
 
 
 class SafetyGate:
@@ -44,9 +86,6 @@ class SafetyGate:
             if inspect.isawaitable(result):
                 return await result  # type: ignore[no-any-return]
             return bool(result)
-        # 默认终端确认
-        loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(
-            None,
-            lambda: input(f"[安全确认] {action_desc}\n执行? [y/N]: ").strip().lower() == "y",
-        )
+        text = await prompt_one_line(f"[安全确认] {action_desc}\n执行? [y/N]: ")
+        t = text.strip().lower()
+        return t == "y" or t == "yes"

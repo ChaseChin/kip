@@ -52,7 +52,7 @@
 
 ```bash
 pip install kip-cli
-# pin version if needed: pip install "kip-cli==0.5.0"
+# pin version if needed: pip install "kip-cli==0.5.1"
 playwright install chromium   # optional, browser tools
 ```
 
@@ -60,7 +60,7 @@ playwright install chromium   # optional, browser tools
 
 ```bash
 pip install kip-cli
-# 固定版本示例：pip install "kip-cli==0.5.0"
+# 固定版本示例：pip install "kip-cli==0.5.1"
 playwright install chromium   # 可选，浏览器相关工具
 ```
 
@@ -109,7 +109,7 @@ playwright install chromium        # 可选
 pip install \
   --index-url https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple \
-  "kip-cli==0.5.0"
+  "kip-cli==0.5.1"
 ```
 
 **中文** —
@@ -121,11 +121,11 @@ pip install \
 pip install \
   --index-url https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple \
-  "kip-cli==0.5.0"
+  "kip-cli==0.5.1"
 ```
 
 示例（独立 venv）：`python3 -m venv .venv-pip`，再执行（版本号与 TestPyPI 上实际一致）：  
-`.venv-pip/bin/pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple "kip-cli==0.5.0"`。
+`.venv-pip/bin/pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple "kip-cli==0.5.1"`。
 
 #### Troubleshooting · 排错
 

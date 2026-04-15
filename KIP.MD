@@ -362,7 +362,7 @@ pytest
 
 ```bash
 pip install kip-cli
-# 固定版本示例：pip install "kip-cli==0.5.0"
+# 固定版本示例：pip install "kip-cli==0.5.1"
 pip install -U kip-cli   # 升级
 ```
 
@@ -460,6 +460,7 @@ kip --trace
 | **2026-04-12** | **测试**：`tests/` + pytest；`pip install -e ".[dev]"` 后 `pytest`。 |
 | **2026-04-14** | **仓库**：`scripts/` 纳入 `.gitignore` 不再提交（发布、TestPyPI 试装等维护者本地保留）；README / 本文件改为说明 `pytest` 与 **twine** 发布流程。 |
 | **2026-04-15** | **分发**：`kip-cli` 已发布 **正式 PyPI**；`KIP.MD` / `README.md` 补充 `pip install kip-cli` 与升级说明；TestPyPI 仅作可选试装说明。 |
+| **2026-04-16** | **0.5.1**：工具前安全确认与 `/setup` 单行提示改为 `asyncio.to_thread(input)`，避免阻塞事件循环；可选 `stty sane`、读入后 `tcflush`；新增 `tests/test_safety_prompt.py`。 |
 | **2026-04-12** | **文档**：「支持的模型提供商」修正为与实现一致：API Key 仅经 `llm.api_key_env`（默认 `KIP_LLM_APIKEY`），非各厂商独立环境变量名。 |
 | **2026-04-12** | **SOUL**：根目录 `SOUL.MD` + `soul.py`；`paths.soul_path` / `KIP_SOUL`；`Agent(soul_markdown=…)`；欢迎面板显示加载状态。 |
 
